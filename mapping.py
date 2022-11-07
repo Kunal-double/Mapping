@@ -1,0 +1,62 @@
+import cv2 as cv
+import numpy as np
+import KeyPressModule as kp
+from time import sleep
+import math
+#parameters
+fspeed=117/10 #forward speed in cm/s  (15 cm/s)
+aspeed=360/10
+interval=0.25
+
+dInterval=fspeed*interval
+aInterval=aspeed*interval
+kp.init()
+x = 500
+y = 500
+points=[(0,0),(0,0)]
+# a=0
+
+def getKeyboardInput():
+    global x,y
+    # d=0
+    if kp.getKey("LEFT"):
+        x-=1
+        # d=dInterval
+        # a=-180
+    elif kp.getKey("RIGHT"):
+        x+=1
+        # d = -dInterval
+        # a = 180
+    if kp.getKey("UP"):
+        y-=1
+        d = dInterval
+        # a = 270
+    elif kp.getKey("DOWN"):
+        y+=1
+        # d = -dInterval
+        # a = -90
+
+    return [x,y]
+
+def drawPoints(img, points):
+    for point in points:
+        cv.circle(img, point, 5, (0, 0, 255), cv.FILLED)
+    cv.circle(img,points[-1],8,(0,255,0),cv.FILLED)
+    cv.putText(img,f'({(points[-1][0]-500)/100},{-(points[-1][1]-500)/100})m',(points[-1][0]+10,points[-1][1]+30),cv.FONT_HERSHEY_PLAIN,1,(255,0,255),1)
+
+
+
+
+
+while True:
+
+    vals=getKeyboardInput()
+    print(vals[0],vals[1])
+
+
+    img = np.zeros((1000, 1000, 3), np.uint8)
+    if(points[-1][0]!=vals[0] or points[-1][1]!=vals[1]):
+        points.append((vals[0], vals[1]))
+    drawPoints(img, points)
+    cv.imshow("Output", img)
+    cv.waitKey(1)
