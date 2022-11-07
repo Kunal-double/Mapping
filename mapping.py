@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 import KeyPressModule as kp
 from time import sleep
-import math
+import random
 #parameters
 fspeed=117/10 #forward speed in cm/s  (15 cm/s)
 aspeed=360/10
@@ -15,7 +15,11 @@ x = 500
 y = 500
 points=[(0,0),(0,0)]
 # a=0
-
+def automaticMovement():
+    global x,y
+    x+=random.randint(0,1)
+    y+=random.randint(-1,1)
+    return [x,y]
 def getKeyboardInput():
     global x,y
     # d=0
@@ -52,6 +56,12 @@ while True:
 
     vals=getKeyboardInput()
     print(vals[0],vals[1])
+
+    # vals2 = automaticMovement()  # automatic motion mapping code
+    # img = np.zeros((1000, 1000, 3), np.uint8)
+    # if (points[-1][0] != vals2[0] or points[-1][1] != vals2[1]):
+    #     points.append((vals2[0], vals2[1]))
+
 
 
     img = np.zeros((1000, 1000, 3), np.uint8)
