@@ -19,6 +19,9 @@ def automaticMovement():
     global x,y
     x+=random.randint(0,1)
     y+=random.randint(-1,1)
+
+
+
     return [x,y]
 def getKeyboardInput():
     global x,y
@@ -33,7 +36,7 @@ def getKeyboardInput():
         # a = 180
     if kp.getKey("UP"):
         y-=1
-        d = dInterval
+
         # a = 270
     elif kp.getKey("DOWN"):
         y+=1
@@ -53,6 +56,8 @@ def drawPoints(img, points):
 
 
 while True:
+
+
 
     vals=getKeyboardInput()
     print(vals[0],vals[1])
