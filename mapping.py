@@ -3,6 +3,8 @@ import numpy as np
 import KeyPressModule as kp
 from time import sleep
 import random
+import pyrebase
+from firebase import firebase
 config = {
   "apiKey": "AIzaSyCjULZ1FxzQHvMji5OR-OZnyOxY9KwV_GA",
   "authDomain": "robot-68d4d.firebaseapp.com",
